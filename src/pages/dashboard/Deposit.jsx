@@ -71,7 +71,7 @@ const handleProceed = () => {
 };
 
 const handlegetallWalletAddress = async () => {
-    await axios.get('https://new-swifteatrn-back-end.vercel.app/api/getallWalletAddress')
+    await axios.get('https://new-swifteatrn-back-end-nine.vercel.app/api/getallWalletAddress')
         .then(response => {
              setWallets(response?.data?.data)
         })

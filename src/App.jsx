@@ -22,7 +22,7 @@ import Reset from "./pages/auth/Reset";
 import Profit from "./pages/dashboard/Profit";
 import DepositHistoryView from "./pages/dashboard/DepositHistoryView";
 import Investmentpay from "./pages/dashboard/Investmentpay";
-import Withdrawals from "./pages/dashboard/Withdrawals";
+import Withdrawals from "./pages/dashboard/Withdrawals"; 
 
 const App = () => {
     const router = createHashRouter([

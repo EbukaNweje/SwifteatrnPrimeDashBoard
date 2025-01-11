@@ -33,7 +33,7 @@ const NewWithdrawal = () => {
 
       const handleGetUser = async () => {
         setLoading(true)
-        await axios.get(`https://new-swifteatrn-back-end.vercel.app/api/userdata/${id}`)
+        await axios.get(`https://new-swifteatrn-back-end-nine.vercel.app/api/userdata/${id}`)
             .then(response => {
                 setLoading(false)
                 setUserDatas(response?.data?.data);
@@ -63,10 +63,10 @@ const NewWithdrawal = () => {
   const handleAmount = (e) =>{
     setAmount(e.target.value)
   }
-  const url = `https://new-swifteatrn-back-end.vercel.app/api/requestwithdrawcode/${id}`
-  const urlll = `https://new-swifteatrn-back-end.vercel.app/api/withdraw/${id}`
-  const urlprofit = `https://new-swifteatrn-back-end.vercel.app/api/transferprofittoaccount/${id}`
-  const urlemail = `https://new-swifteatrn-back-end.vercel.app/api/withdrawalemailsend/${id}`
+  const url = `https://new-swifteatrn-back-end-nine.vercel.app/api/requestwithdrawcode/${id}`
+  const urlll = `https://new-swifteatrn-back-end-nine.vercel.app/api/withdraw/${id}`
+  const urlprofit = `https://new-swifteatrn-back-end-nine.vercel.app/api/transferprofittoaccount/${id}`
+  const urlemail = `https://new-swifteatrn-back-end-nine.vercel.app/api/withdrawalemailsend/${id}`
 
   let userName = userDatas?.userName
   let email = userDatas?.email

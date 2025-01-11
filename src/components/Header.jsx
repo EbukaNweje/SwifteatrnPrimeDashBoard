@@ -39,7 +39,7 @@ const Header = () => {
 
     const handleGetUser = async () => {
         setLoading(true)
-        await axios.get(`https://new-swifteatrn-back-end.vercel.app/api/userdata/${id}`)
+        await axios.get(`https://new-swifteatrn-back-end-nine.vercel.app/api/userdata/${id}`)
             .then(response => {
                 setLoading(false)
                 setUserDatas(response?.data?.data);

@@ -38,7 +38,7 @@ const Reset = () => {
     
       const Onsubmit = async (data) => {
             setLoading(true)
-            const url = `https://new-swifteatrn-back-end.vercel.app/api/resetLink${id}/${token}`
+            const url = `https://new-swifteatrn-back-end-nine.vercel.app/api/resetLink${id}/${token}`
             const FormData ={
             password: data.password,
             confirmPassword: data.confirmPassword,

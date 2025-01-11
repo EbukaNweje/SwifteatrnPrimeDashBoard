@@ -56,7 +56,7 @@ const Signup = () => {
   const Onsubmit = async (data, e) => {
     e.preventDefault(); 
     setLoading(true)
-    const url = 'https://new-swifteatrn-back-end.vercel.app/api/register'
+    const url = 'https://new-swifteatrn-back-end-nine.vercel.app/api/register'
     const FormData ={
       password: data.password,
       email: data.email,

@@ -19,7 +19,7 @@ const Profit = () => {
         setLoading(true);
         try {
             const response = await axios.get(
-                `https://new-swifteatrn-back-end.vercel.app/api/getallinterest/${id}`
+                `https://new-swifteatrn-back-end-nine.vercel.app/api/getallinterest/${id}`
             );
             console.log('API Response:', response.data.data);
             // const depositsArray = Object.entries(response.data.data).map(([key, value]) => ({ key, value }));

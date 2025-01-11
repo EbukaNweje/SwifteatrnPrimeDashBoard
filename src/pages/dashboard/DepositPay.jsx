@@ -31,7 +31,7 @@ const DepositPay = () => {
       
 
       const handlegetallWalletAddress = async () => {
-        await axios.get('https://new-swifteatrn-back-end.vercel.app/api/getallWalletAddress')
+        await axios.get('https://new-swifteatrn-back-end-nine.vercel.app/api/getallWalletAddress')
             .then(response => {
                  setWallets(response?.data?.data)
                 // dispatch(userData(response?.data.data));
@@ -62,7 +62,7 @@ const DepositPay = () => {
 
       const handleGetUser = async () => {
         setLoading(true)
-        await axios.get(`https://new-swifteatrn-back-end.vercel.app/api/userdata/${id}`)
+        await axios.get(`https://new-swifteatrn-back-end-nine.vercel.app/api/userdata/${id}`)
             .then(response => {
                 setLoading(false)
                  console.log(response?.data?.data);
@@ -81,8 +81,8 @@ const DepositPay = () => {
      }
     }, [id])
 
-    const url = `https://new-swifteatrn-back-end.vercel.app/api/sendpayment/${id}`
-      const url2 = `https://new-swifteatrn-back-end.vercel.app/api/deposit/${id}
+    const url = `https://new-swifteatrn-back-end-nine.vercel.app/api/sendpayment/${id}`
+      const url2 = `https://new-swifteatrn-back-end-nine.vercel.app/api/deposit/${id}
 `
       const data = {
         amount: walletInfo?.amount

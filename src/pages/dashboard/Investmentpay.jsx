@@ -57,7 +57,7 @@ const Investmentpay = () => {
 
   const getAllPlan = () => {
     const url =
-      "https://new-swifteatrn-back-end.vercel.app/api/getallplan";
+      "https://new-swifteatrn-back-end-nine.vercel.app/api/getallplan";
     axios
       .get(url)
       .then((response) => {
@@ -98,7 +98,7 @@ const Investmentpay = () => {
   }
 
   const handleProceed = async() => {
-    const url = `https://new-swifteatrn-back-end.vercel.app/api/invest/${userId}`
+    const url = `https://new-swifteatrn-back-end-nine.vercel.app/api/invest/${userId}`
       setLoading(true)
       axios.post(url, data)
       .then(res => {

@@ -16,7 +16,7 @@ const handleGetAllDeposits = async () => {
     setLoading(true);
     try {
         const response = await axios.get(
-            `https://new-swifteatrn-back-end.vercel.app/api/getallwithdrawal/${id}`
+            `https://new-swifteatrn-back-end-nine.vercel.app/api/getallwithdrawal/${id}`
         );
         console.log('API Response:', response?.data?.data);
         // const depositsArray = Object.entries(response.data.data).map(([key, value]) => ({ key, value }));
