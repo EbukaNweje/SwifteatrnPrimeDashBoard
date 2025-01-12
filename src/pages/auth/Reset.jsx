@@ -23,9 +23,9 @@ const Reset = () => {
               "Password must be 8 characters long, include an uppercase and special character (!@#$%^&*).",
           }),
         confirmPassword: z.string().min(1, { message: "Confirm Password is required" }),
-        check: z.boolean().refine((val) => val === true, {
-          message: "You must accept the terms and conditions.",
-        }),
+        // check: z.boolean().refine((val) => val === true, {
+        //   message: "You must accept the terms and conditions.",
+        // }),
       })
       .refine((data) => data.password === data.confirmPassword, {
         message: "Passwords do not match.",
@@ -36,9 +36,11 @@ const Reset = () => {
         resolver: zodResolver(User),
       });
     
-      const Onsubmit = async (data) => {
+      const Onsubmit = async (data, e) => {
             setLoading(true)
-            const url = `https://new-swifteatrn-back-end-nine.vercel.app/api/resetLink${id}/${token}`
+             e.preventDefault(); 
+
+            const url = `https://new-swifteatrn-back-end-nine.vercel.app/api/resetLink/${id}/${token}`
             const FormData ={
             password: data.password,
             confirmPassword: data.confirmPassword,
@@ -48,13 +50,13 @@ const Reset = () => {
                 setLoading(false)
                 console.log("response:",response);
                 toast.success(response.data.message);
-                    Nav('/')
+                    // Nav('/')
                 
              })
              .catch(error=>{
                 setLoading(false)
                console.log("error:",error)
-               toast.error(error.data.message);
+               toast.error(error.response?.data?.message);
              })
       };
     return (

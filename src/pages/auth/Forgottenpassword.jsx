@@ -26,7 +26,7 @@ const Forgottenpassword = () => {
       const Onsubmit = async (data, e) => {
         e.preventDefault(); 
         setLoading(true)
-        const url = 'https://new-swifteatrn-back-end-nine.vercel.app/api/forgot-password'
+        const url = 'https://newswifteatrnbackend.onrender.com/api/forgotpassword'
         const FormData ={
             email: data.email
         }
@@ -36,9 +36,8 @@ const Forgottenpassword = () => {
             setLoading(false)
             console.log(res);
             toast.success(res.data.message) 
-            Nav('/reset-password')
-        })
-        .catch( Error => {
+            // Nav('/')
+        }).catch( Error => {
             setLoading(false)
             console.log(Error);
             toast.error(Error.response.message)
