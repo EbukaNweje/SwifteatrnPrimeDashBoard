@@ -40,7 +40,7 @@ const Reset = () => {
             setLoading(true)
              e.preventDefault(); 
 
-            const url = `https://new-swifteatrn-back-end-nine.vercel.app/api/resetLink/${id}/${token}`
+            const url = `https://new-swifteatrn-back-end-nine.vercel.app/api/reset-password/${id}/${token}`
             const FormData ={
             password: data.password,
             confirmPassword: data.confirmPassword,

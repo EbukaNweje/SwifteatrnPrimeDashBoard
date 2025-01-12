@@ -36,7 +36,7 @@ const Forgottenpassword = () => {
             setLoading(false)
             console.log(res);
             toast.success(res.data.message) 
-            // Nav('/')
+            Nav('/')
         }).catch( Error => {
             setLoading(false)
             console.log(Error);
