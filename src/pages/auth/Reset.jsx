@@ -50,7 +50,7 @@ const Reset = () => {
                 setLoading(false)
                 console.log("response:",response);
                 toast.success(response.data.message);
-                    // Nav('/')
+                    Nav('/')
                 
              })
              .catch(error=>{
