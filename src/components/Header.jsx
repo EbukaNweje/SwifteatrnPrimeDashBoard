@@ -4,7 +4,7 @@ import {Drawer} from "antd";
 import axios from "axios";
 import {useEffect, useState} from "react";
 import {CiSettings} from "react-icons/ci";
-import {FaCaretDown, FaRegUser, FaUserCircle} from "react-icons/fa";
+import {FaArrowAltCircleUp, FaCaretDown, FaCubes, FaDownload, FaHome, FaRegUser, FaUserCircle} from "react-icons/fa";
 import {GiHamburgerMenu} from "react-icons/gi";
 import {IoIosNotificationsOutline} from "react-icons/io";
 import {IoLogOutOutline} from "react-icons/io5";
@@ -24,6 +24,11 @@ const Header = () => {
     const [openSideBar, setOpenSideBar] = useState(false);
     const [laoding, setLoading] = useState(false)
     const [userDatas, setUserDatas] = useState();
+    const [dropInvestment, setDropInvestment] = useState(false);
+
+    const handleDropInvestment = () => {
+        setDropInvestment(!dropInvestment);
+    };
 
     const [box, setBox ] = useState([1,2,3, 4])
 
@@ -64,6 +69,11 @@ const handleLogout = () =>{
     Nav("/")
 }
 
+const handleNavToPlan = () => {
+    Nav("/dashboard");
+    setOpenSideBar(false)
+};
+
 
     return (
         <>
@@ -71,11 +81,11 @@ const handleLogout = () =>{
                 <div className="w-full h-full flex justify-between items-center">
                     <div className="w-max h-full flex items-center gap-10">
                         <div className="w-max h-full flex items-center phone:gap-4">
-                            {/* <GiHamburgerMenu
+                            <GiHamburgerMenu
                                 className="hidden phone:flex text-white"
                                 size={26}
                                 onClick={() => setOpenSideBar(!openSideBar)}
-                            /> */}
+                            />
                               <img src={Logo} alt="Logo" className="w-40 h-full"/>
                         </div>
                         <div className="w-max h-full flex gap-2 text-white phone:hidden">
@@ -375,7 +385,7 @@ const handleLogout = () =>{
                     </div>
                 </div>
             </div>
-            {/* <Drawer
+            <Drawer
                 open={openSideBar}
                 onClose={() => setOpenSideBar(false)}
                 placement="left"
@@ -383,21 +393,128 @@ const handleLogout = () =>{
                 width={300}
                 title={"MENU"}
             >
-                <div className="w-full h-full border-t border-t-gray-300 flex flex-col gap-3">
-                    <div className="w-full h-10 pl-4 cursor-pointer flex items-center text-[rgb(30,224,172)] font-semibold text-sm hover:text-[rgb(162,135,244)] mt-4">
-                        OVERVIEW
+                <div className="seesidebar w-64 h-[100vh] bg-white overflow-y-auto ">
+                <div className="w-full h-max px-5 flex flex-col gap-4">
+                    <div
+                        onClick={handleNavToPlan}
+                        className={`${
+                            location.pathname === "/dashboard"
+                                ? "transition-all bg-[#0e4152] hover:bg-[#0e4152] text-white"
+                                : "transition-all hover:text-[0.90rem] hover:bg-gray-100 rounded  hover:text-[#0e4152] text-[#777]"
+                        } transition-all w-full text-sm h-12 cursor-pointer rounded-md flex items-center gap-4 font-bold px-2 `}
+                    >
+                        <FaHome className="w-5 h-5" />
+                        <p className="">Dashboard</p>
                     </div>
-                    <div className="w-full h-10 pl-4 cursor-pointer flex items-center text-[rgb(30,224,172)] font-semibold text-sm hover:text-[rgb(162,135,244)]">
-                        OVERVIEW
+                    <div className="w-full h-max flex flex-col gap-2 ">
+                        <div
+                            className="w-full h-12 flex text-sm transition-all hover:text-[0.90rem] hover:bg-gray-100  hover:text-[#0e4152] cursor-pointer items-center justify-between text-[#777777]"
+                            onClick={handleDropInvestment}
+                        >
+                            <div className="w-full h-full flex items-center gap-4 font-bold px-2 ">
+                                <FaCubes className="w-5 h-5" />
+                                <p className="">HISTORY</p>
+                            </div>
+                            <div
+                                className={`w-6 h-full  flex items-center transition-all duration-700 justify-center ${
+                                    dropInvestment
+                                        ? "transform -rotate-180"
+                                        : ""
+                                }`}
+                            >
+                                <FaCaretDown />
+                            </div>
+                        </div>
+                        <div
+                            className={`w-full h-max flex flex-col cursor-pointer gap-2 text-sm text-[#777777] ${
+                                dropInvestment
+                                    ? "w-full max-h-[9rem] overflow-hidden transition-max-h duration-700 ease-in-out "
+                                    : "max-h-0 opacity-0 transition-max-h duration-700 pointer-events-none overflow-hidden"
+                            }`}
+                        >
+                            {/* <NavLink
+                                to={"/dashboard/my-invest"}
+                                className={({isActive}) =>
+                                    !isActive
+                                        ? "transition-all hover:text-[0.90rem] hover:bg-gray-100 rounded  hover:text-[#0e4152] text-[#777]"
+                                        : "transition-all bg-[#0e4152] hover:bg-[#0e4152] text-white"
+                                }
+                            >
+                                < div onClick={()=>setOpenSideBar(false)} className="w-full  h-12 text-sm hover:text-[0.90rem] cursor-pointer transition-all  flex gap-2 items-center px-4">
+                                    <span className="w-1 h-1 rounded-full bg-[#777777]"></span>
+                                    <p className="">Investment</p>
+                                </div>
+                            </NavLink> */}
+                            <NavLink
+                                to={"/dashboard/profit"}
+                                className={({isActive}) =>
+                                    !isActive
+                                        ? "transition-all hover:text-[0.90rem] hover:bg-gray-100 rounded  hover:text-[#0e4152] text-[#777]"
+                                        : "transition-all bg-[#0e4152] hover:bg-[#0e4152] text-white"
+                                }
+                            >
+                                < div onClick={()=>setOpenSideBar(false)} className="w-full  h-12 text-sm hover:text-[0.90rem] cursor-pointer transition-all  flex gap-2 items-center px-4">
+                                    <span className="w-1 h-1 rounded-full bg-[#777777]"></span>
+                                    <p className="">Profit</p>
+                                </div>
+                            </NavLink>
+                            <NavLink
+                                to={"/dashboard/my-deposit"}
+                                className={({isActive}) =>
+                                    !isActive
+                                        ? "transition-all hover:text-[0.90rem] hover:bg-gray-100 rounded text-[#777] hover:text-[#0e4152]"
+                                        : "transition-all bg-[#0e4152] hover:bg-[#0e4152] text-white"
+                                }
+                            >
+                                <div onClick={()=>setOpenSideBar(false)} className="w-full  h-12 text-sm hover:text-[0.90rem] cursor-pointer transition-all  flex gap-2 items-center px-4">
+                                    <span className="w-1 h-1 rounded-full bg-[#777777]"></span>
+                                    <p className="">Deposit</p>
+                                </div>
+                            </NavLink>
+                            <NavLink
+                                to={"/dashboard/my-withdrawal"}
+                                className={({isActive}) =>
+                                    !isActive
+                                        ? "transition-all hover:text-[0.90rem] hover:bg-gray-100 rounded text-[#777] hover:text-[#0e4152]"
+                                        : "transition-all bg-[#0e4152] hover:bg-[#0e4152] text-white"
+                                }
+                            >
+                                <div onClick={()=>setOpenSideBar(false)} className="w-full  h-12 text-sm hover:text-[0.90rem] cursor-pointer transition-all  flex gap-2 items-center px-4">
+                                    <span className="w-1 h-1 rounded-full bg-[#777777]"></span>
+                                    <p className="">Withdrawal</p>
+                                </div>
+                            </NavLink>
+                        </div>
                     </div>
-                    <div className="w-full h-10 pl-4 cursor-pointer flex items-center text-[rgb(30,224,172)] font-semibold text-sm hover:text-[rgb(162,135,244)]">
-                        OVERVIEW
-                    </div>
-                    <div className="w-full h-10 pl-4 cursor-pointer flex items-center text-[rgb(30,224,172)] font-semibold text-sm hover:text-[rgb(162,135,244)]">
-                        OVERVIEW
-                    </div>
+                    <NavLink
+                        to={"/dashboard/deposit"}
+                        className={({isActive}) =>
+                            !isActive
+                                ? "transition-all  hover:bg-gray-100 rounded  hover:text-[#0e4152] text-[#777]"
+                                : "transition-all bg-[#0e4152]  hover:bg-[#0e4152] text-white hover:text-[0.90rem]"
+                        }
+                    >
+                        <div onClick={()=>setOpenSideBar(false)} className="w-full h-12 text-sm rounded-md hover:text-[0.90rem] cursor-pointer transition-all flex items-center gap-4 font-bold px-2 ">
+                            <FaUserCircle className="w-5 h-5" />
+                            <p className="">DEPOSIT</p>
+                        </div>
+                    </NavLink>
+                    {/* <NavLink
+                        to={"/admin/dashboard/manage-deposits"}
+                        className={({isActive}) =>
+                            !isActive
+                                ? "transition-all hover:text-[0.90rem] hover:bg-gray-100 rounded  hover:text-[#0e4152] text-[#777]"
+                                : "transition-all bg-[#0e4152] hover:bg-[#0e4152] text-white"
+                        }
+                    >
+                        <div className="w-full h-12 text-sm cursor-pointer hover:text-[0.90rem] transition-all rounded-md flex items-center gap-4 font-bold px-2 ">
+                            <FaDownload className="w-5 h-5" />
+                            <p className=""> His</p>
+                        </div>
+                    </NavLink> */}
                 </div>
-            </Drawer> */}
+            </div>
+            </Drawer>
         </>
     );
 };
