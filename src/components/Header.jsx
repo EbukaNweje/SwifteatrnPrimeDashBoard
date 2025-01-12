@@ -245,18 +245,24 @@ const handleLogout = () =>{
                                 <div className="w-max h-max flex flex-col">
                                     <p   style={{ textTransform: "capitalize" }}
                                     className="truncate text-sm font-semibold text-[#364a63]">
+                                         {
+                                        userDatas?.verify === true ? <p className="text-xs font-semibold text-green-500"> verified </p> : <p className="text-xs font-semibold text-red-500"> Unverified</p>
+                                    }
                                     { laoding ? <ClipLoader color='white' /> :  `${userDatas?.firstName} ${userDatas?.lastName}${" "}`}
                                     </p>
                                     <p className="truncate text-xs text-[#8094ae]">
                                     { laoding ? <ClipLoader color='white' /> :  `${userDatas?.email}`}
                                     </p>
                                 </div>
-                                <div className="w-max">
+                                 <NavLink to={"/dashboard/profile"}>
+                                 <div className="w-max">
                                     <CiSettings
                                         size={20}
                                         className="text-[#364a63]"
                                     />
                                 </div>
+                                </NavLink>
+                                
                             </div>
                             <div className="w-full h-max flex flex-col gap-2 justify-center pl-8 py-5 border-t border-t-gray-300">
                                 <p className="text-sm font-semibold text-[#8094ae]">
@@ -277,12 +283,12 @@ const handleLogout = () =>{
                                 </p>
                             </div>
                             <div className="w-full h-max flex flex-col gap-4 justify-center pl-8 py-5 border-t border-t-gray-300 text-[#526484]">
-                                <NavLink to={"/dashboard/profile"}>
+                                {/* <NavLink to={"/dashboard/profile"}>
                                     <div className="w-full h-8 flex items-center hover:text-[#a287f4] cursor-pointer transition-all duration-500 gap-2 ">
                                         <FaRegUser size={17} />
                                         <p className="text-sm">View Profile</p>
                                     </div>
-                                </NavLink>
+                                </NavLink> */}
                                 <NavLink to={"/dashboard/profile"}>
                                     <div className="w-full h-8 flex items-center hover:text-[#a287f4] cursor-pointer transition-all duration-500 gap-2">
                                         <FaRegUser size={17} />
