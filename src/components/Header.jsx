@@ -71,12 +71,12 @@ const handleLogout = () =>{
                 <div className="w-full h-full flex justify-between items-center">
                     <div className="w-max h-full flex items-center gap-10">
                         <div className="w-max h-full flex items-center phone:gap-4">
-                            <GiHamburgerMenu
+                            {/* <GiHamburgerMenu
                                 className="hidden phone:flex text-white"
                                 size={26}
                                 onClick={() => setOpenSideBar(!openSideBar)}
-                            />
-                              <img src={Logo} alt="Logo" className="w-full h-full"/>
+                            /> */}
+                              <img src={Logo} alt="Logo" className="w-40 h-full"/>
                         </div>
                         <div className="w-max h-full flex gap-2 text-white phone:hidden">
                             <NavLink to={"/dashboard"}>
@@ -369,7 +369,7 @@ const handleLogout = () =>{
                     </div>
                 </div>
             </div>
-            <Drawer
+            {/* <Drawer
                 open={openSideBar}
                 onClose={() => setOpenSideBar(false)}
                 placement="left"
@@ -391,7 +391,7 @@ const handleLogout = () =>{
                         OVERVIEW
                     </div>
                 </div>
-            </Drawer>
+            </Drawer> */}
         </>
     );
 };
