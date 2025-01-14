@@ -23,6 +23,7 @@ import Profit from "./pages/dashboard/Profit";
 import DepositHistoryView from "./pages/dashboard/DepositHistoryView";
 import Investmentpay from "./pages/dashboard/Investmentpay";
 import Withdrawals from "./pages/dashboard/Withdrawals"; 
+import Await from "./pages/auth/Await";
 
 const App = () => {
     const router = createHashRouter([
@@ -33,6 +34,10 @@ const App = () => {
         {
             path: "register",
             element: <Signup />,
+        },
+        {
+            path: "await",
+            element: <Await />,
         },
         {
             path: "forgotten-password", element: <Forgottenpassword />,

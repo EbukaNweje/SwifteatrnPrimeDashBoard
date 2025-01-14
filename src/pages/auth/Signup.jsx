@@ -72,7 +72,11 @@ const Signup = () => {
        console.log("response:",response.data.data._id);
        dispatch(userId(response?.data?.data?._id))
        toast.success(response?.data?.message)
-       Nav("/dashboard")
+       if (response.data.verify === true) {
+        Nav("/dashboard")
+       } else {
+        Nav("/await")
+       }
     })
     .catch(error =>{
       setLoading(false)

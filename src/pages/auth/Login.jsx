@@ -46,7 +46,11 @@ const [loading, setLoading] = useState(false)
        console.log("response:",response.data?._id);
        dispatch(userId(response?.data?._id))
        toast.success(response?.message)
-       Nav("/dashboard")
+      if (response?.data.verify === true) {
+        Nav("/dashboard")
+      } else {
+        Nav('/await')
+      }
     })
     .catch(error =>{
       setLoading(false)
