@@ -108,8 +108,8 @@ const DepositPay = () => {
         .then(res => {
             setLoading(false)
             SendPayMenttoadmin()
+            toast.success("Thanks for deposit. We will check your transaction.")
             Nav("/dashboard")
-          setPay(true)
         }).catch((err)=>{
             setLoading(false)
           console.log(err)
