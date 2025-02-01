@@ -71,11 +71,11 @@ const MyPlans = () => {
                                     </p>
                                     <div className="w-full flex items-center justify-between">
                                         <p className="w-1/2 flex flex-col text-1xl text-[#526484]">
-                                            525%
+                                            {e.percentageInterest}%
                                             <span className="text-xs text-[#8094ae]">Interest</span>
                                         </p>
                                         <p className="w-1/2  flex flex-col text-1xl text-[#526484]">
-                                            35
+                                            {e.durationDays}
                                             <span className="text-xs text-[#8094ae]">Days</span>
                                         </p>
                                     </div>

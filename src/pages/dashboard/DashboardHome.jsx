@@ -87,9 +87,11 @@ const DashboardHome = () => {
                         <p className="text-4xl phone:w-full font-semibold text-[rgb(54,74,99)] truncate">
                         { loading ? <ClipLoader color='white' /> :  `${userDatas?.firstName} ${userDatas?.lastName} ${userDatas?.userName}`}
                         </p>
-                        <div className="w-max h-max py-2 rounded bg-white border border-gray-300 text-sm font-semibold px-3 flex items-center justify-center gap-2">
+                        <div className="w-max h-max py-2 rounded bg-white border border-gray-300 text-sm font-semibold px-3 flex items-center justify-center gap-2"
+                            onClick={() => Nav('my-plans')}
+                        >
                             <p>My Plans</p>
-                            <FaArrowRightLong  onClick={() => Nav('my-plans')}/>
+                            <FaArrowRightLong/>
                         </div>
                     </div>
                     <p className="text-[rgb(82,100,132)] mt-1">

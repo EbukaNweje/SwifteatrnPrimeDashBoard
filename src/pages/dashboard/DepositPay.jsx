@@ -133,7 +133,7 @@ const DepositPay = () => {
                         Copy and send this exact amount, to the payment address
                         below.
                     </div>
-                    <div className="w-full h-44 flex items-center justify-center border-t border-t-gray-300 p-2">
+                    {/* <div className="w-full h-44 flex items-center justify-center border-t border-t-gray-300 p-2">
                         {
                             walletInfo?.wallet === "Bitcoin" ? 
                             <img
@@ -147,7 +147,7 @@ const DepositPay = () => {
                         className="w-full h-full object-contain"
                     /> 
                         }
-                    </div>
+                    </div> */}
                     <div className="w-full h-max flex flex-col border-t border-t-gray-300 p-4">
                         <div className="w-full flex flex-col gap-2">
                             <p>{walletInfo?.wallet} Payment Address*</p>

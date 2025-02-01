@@ -20,27 +20,27 @@ const Deposit = () => {
   const [wallets, setWallets] = useState(null)
 
    const User = z
-      .object({ check: z.boolean().refine((val) => val === true, {
-          message: "You must accept the terms and conditions",
-        }),
-    })
+    //   .object({ check: z.boolean().refine((val) => val === true, {
+    //       message: "You must accept the terms and conditions",
+    //     }),
+    // })
 
 
-     const {
-        register,
-        handleSubmit,
-        formState: { errors },
-      } = useForm({
-        resolver: zodResolver(User),
-      });
+    //  const {
+    //     // register,
+    //     handleSubmit,
+    //     formState: { errors },
+    //   } = useForm({
+    //     resolver: zodResolver(User),
+    //   });
 
-  const handleOpenModal = handleSubmit(() => {
+  const handleOpenModal = () => {
     if (amount !== 0.00 && wallet !== "") {
         setOpenModal(true);
     } else {
         toast.error("Wallet and amount are required");
     }
-});
+};
 
   const handleAmount = (e) =>{
     setAmount(e.target.value)
@@ -128,22 +128,22 @@ useEffect(() => {
                         {/* <p className="w-max h-max text-xs flex items-center text-[#8094ae]">
                             Note: Minimum deposit $ <span>100,000.00</span>{" "}
                             &nbsp; and up to &nbsp; $ <span>1,000,000.00</span>
-                        </p> */}
+                        </p> */} 
                     </div>
-                    <div className="w-full h-max flex items-center">
+                    {/* <div className="w-full h-max flex items-center">
                         <input
                             type="checkbox"
                             name=""
                             className="w-6 h-6"
                             id=""
-                            required
-                            {...register("check")}
+                            // required
+                            // {...register("check")}
                         />
                         <p className="ml-2 text-sm">
                             I agree to the terms and conditions
                         </p>
-                        {errors?.check && <span style={{ color: "red" }}>{errors.check.message}</span>}
-                    </div>
+                        </div> */}
+                        {/* {errors?.check && <span style={{ color: "red" }}>{errors.check.message}</span>} */}
                 </div>
             </div>
             <div className="w-[40%] phone:w-full phone:p-0 h-max pl-24 pt-24">
