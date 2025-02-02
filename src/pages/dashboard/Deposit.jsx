@@ -14,7 +14,7 @@ const Deposit = () => {
   const navigate = useNavigate()
   const dispacth = useDispatch()
   const [amount, setAmount] = useState(0.00)
-  const [wallet, setWallet] = useState("Bitcoin")
+  const [wallet, setWallet] = useState("")
   const [exchangeRate, setExchangeRate] = useState(null);
   const [openModal, setOpenModal] = useState(false);
   const [wallets, setWallets] = useState(null)
@@ -103,6 +103,7 @@ useEffect(() => {
                             onChange={handleWallet}
                             className="w-full h-14 border border-gray-300 rounded px-4 py-2"
                         >
+                            <option value="">Choose Wallet Address</option>
                             {
                                 wallets?.map((props, index)=>(
                                     <option value={props.walletName} key={index}>{props.walletName}</option>

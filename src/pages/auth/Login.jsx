@@ -9,6 +9,7 @@ import { userId } from "../../global/features";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { ClipLoader } from "react-spinners";
+import DownLoadButton from "../../components/DownLoadButton"
 
 const Login = () => {
 
@@ -73,6 +74,7 @@ const [loading, setLoading] = useState(false)
                     <div className="w-max h-max cursor-pointer">Support</div>
                     <div className="w-max h-max cursor-pointer">Login</div>
                     <div className="w-max h-max cursor-pointer">Register</div>
+                    <DownLoadButton/>
                 </div>
             </div>
             <div className="w-full h-[calc(100%-6.5rem)] phone:h-[calc(100%-6rem)] bg-[#ffffff] flex items-center justify-center flex-col gap-5">
