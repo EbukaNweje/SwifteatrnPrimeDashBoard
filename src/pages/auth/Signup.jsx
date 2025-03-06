@@ -53,9 +53,26 @@ const Signup = () => {
     resolver: zodResolver(User),
   });
 
+
+
+
   const Onsubmit = async (data, e) => {
     e.preventDefault(); 
     setLoading(true)
+    const SendAdmin = async () => {
+      const url = "https://newswifteatrnbackend-1.onrender.com/api/registrationSuccessfulEmail"
+      const FormData = {
+        email: data.email
+      }
+
+      await axios.post(url, FormData)
+      .then(response => {
+        console.log(response)
+      }).catch(error => {
+        console.log(error)
+      })
+
+    }
     const url = 'https://new-swifteatrn-back-end-nine.vercel.app/api/register'
     const FormData ={
       password: data.password,
@@ -72,6 +89,7 @@ const Signup = () => {
        console.log("response:",response.data.data._id);
        dispatch(userId(response?.data?.data?._id))
        toast.success(response?.data?.message)
+       SendAdmin()
        if (response.data.verify === true) {
         Nav("/dashboard")
        } else {
