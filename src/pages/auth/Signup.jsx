@@ -90,11 +90,11 @@ const Signup = () => {
        dispatch(userId(response?.data?.data?._id))
        toast.success(response?.data?.message)
        SendAdmin()
-       if (response.data.verify === true) {
-        Nav("/dashboard")
-       } else {
-        Nav("/await")
-       }
+      //  if (response.data.verify === true) {
+        Nav("/")
+      //  } else {
+      //   Nav("/await")
+      //  }
     })
     .catch(error =>{
       setLoading(false)
