@@ -34,6 +34,7 @@ const DashboardHome = () => {
             .then(response => {
                 setLoading(false)
                 setUserDatas(response?.data?.data);
+                console.log(response?.data?.data);
             })
             .catch(error => {
                 setLoading(false)
@@ -172,10 +173,10 @@ const DashboardHome = () => {
                         </div>
                         <div className="w-full h-max flex flex-col gap-2 border-t-2 border-t-[#a286f4] mt-2 pt-5 text-sm text-[#526484]">
                             <p className="w-full h-max flex justify-between">
-                                Available Funds <span>{ loading ? <ClipLoader color='white' /> :  `$${userDatas?.accountBalance}`}</span>
+                                Total Deposit  <span>{ loading ? <ClipLoader color='white' /> :  `$${userDatas?.totalDeposit}`}</span>
                             </p>
                             <p className="w-full h-max flex justify-between">
-                                Available Profits <span> { loading ? <ClipLoader color='white' /> :  `$${userDatas?.totalProfit}`}</span>
+                                Total Profits <span> { loading ? <ClipLoader color='white' /> :  `$${userDatas?.totalProfit}`}</span>
                             </p>
                             <div className="w-full h-max flex justify-between border-t border-t-gray-300 font-semibold text-black py-2">
                                 <p>Total</p>
