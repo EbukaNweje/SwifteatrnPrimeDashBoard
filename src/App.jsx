@@ -58,7 +58,7 @@ const App = () => {
                     path: "",
                     children: [
                       { path: "", element: <DashboardHome /> },              // when visiting /dashboard
-                      { path: ":userId", element: <DashboardHome /> },       // when visiting /dashboard/123
+                      { path: ":userDataId", element: <DashboardHome /> },       // when visiting /dashboard/123
                     ]
                 },
                 { path: "deposit", element: <Deposit />, },

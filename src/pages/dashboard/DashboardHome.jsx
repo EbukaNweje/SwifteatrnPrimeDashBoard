@@ -12,12 +12,21 @@ import { ClipLoader } from "react-spinners";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { toast } from "react-toastify";
 import { Toaster } from "react-hot-toast";
+import { userId } from "../../global/features";
 
 const DashboardHome = () => {
-    const id = useSelector((state)=> state?.id)
-    const { userId } = useParams();
+    // const id = useSelector((state)=> state?.id)
+    const { userDataId } = useParams();
     const reduxId = useSelector((state) => state?.id);
-    const finalId = userId || reduxId;
+    const finalId = userDataId || reduxId;
+    const dispatch = useDispatch();
+
+
+    useEffect(() => {
+        if (userDataId) {
+          dispatch(userId(userDataId));
+        }
+      }, [userId, dispatch]);
 
     const [userDatas, setUserDatas] = useState({});
     const [exchangeRate, setExchangeRate] = useState(null);
@@ -31,58 +40,58 @@ const DashboardHome = () => {
 
     const Nav = useNavigate()
 
-    const handleGetUser = async () => {
-        if (!finalId) return;
-        setLoading(true);
-        try {
-          const response = await axios.get(
-            `https://new-swifteatrn-back-end-nine.vercel.app/api/userdata/${finalId}`
-          );
-          setUserDatas(response?.data?.data);
-          console.log(response?.data?.data);
-        } catch (error) {
-          toast.error("Error occurred, please try again");
-        } finally {
-          setLoading(false);
-        }
-      };
-      
-      useEffect(() => {
-        if (finalId) {
-          handleGetUser();
-        }
-      }, [finalId]);
+   const handleGetUser = async () => {
+  if (!finalId) return;
+  setLoading(true);
+  try {
+    const response = await axios.get(
+      `https://new-swifteatrn-back-end-nine.vercel.app/api/userdata/${finalId}`
+    );
+    setUserDatas(response?.data?.data);
+    console.log(response?.data?.data);
+  } catch (error) {
+    toast.error("Error occurred, please try again");
+  } finally {
+    setLoading(false);
+  }
+};
+
+useEffect(() => {
+  if (finalId) {
+    handleGetUser();
+  }
+}, [finalId]);
 
     const totalBalance = userDatas?.accountBalance + userDatas?.totalProfit
     const totalTradingBalance =  userDatas.totalWithdrawal + userDatas.tradingAccounts    
 
-    useEffect(() => {
-        axios
-            .get("https://api.coindesk.com/v1/bpi/currentprice.json")
-            .then((response) => {
-                const rate = response?.data?.bpi?.USD?.rate.replace(",", ""); // assuming USD rate
-                setExchangeRate(parseFloat(rate));
-            })
-            .catch((error) => {
-                console.log(error);
-                toast.error("Error fetching exchange rate:");
-            });
-    }, []); 
+    // useEffect(() => {
+    //     axios
+    //         .get("https://api.coindesk.com/v1/bpi/currentprice.json")
+    //         .then((response) => {
+    //             const rate = response?.data?.bpi?.USD?.rate.replace(",", ""); // assuming USD rate
+    //             setExchangeRate(parseFloat(rate));
+    //         })
+    //         .catch((error) => {
+    //             console.log(error);
+    //             toast.error("Error fetching exchange rate:");
+    //         });
+    // }, []); 
 
-    const bitcoinValue = userDatas?.accountBalance / exchangeRate;
-    const bitcoinValue2 = userDatas?.totalProfit / exchangeRate;
-    const bitcoinValue3 = userDatas?.bonus / exchangeRate;
-    const bitcoinValue4 = userDatas?.ref / exchangeRate;
-    const bitcoinValue5 = userDatas?.totalDeposit / exchangeRate;
-    const bitcoinValue6 = userDatas?.totalWithdrawal / exchangeRate;
-    const bitcoinValue7 = userDatas?.totalInvestment / exchangeRate;
-    const roundedNumber = parseFloat(bitcoinValue.toFixed(8));
-    const roundedNumber2 = parseFloat(bitcoinValue2.toFixed(8));
-    const roundedNumber3 = parseFloat(bitcoinValue3.toFixed(8));
-    const roundedNumber4 = parseFloat(bitcoinValue4.toFixed(8));
-    const roundedNumber5 = parseFloat(bitcoinValue5.toFixed(8));
-    const roundedNumber6 = parseFloat(bitcoinValue6.toFixed(8));
-    const roundedNumber7 = parseFloat(bitcoinValue7.toFixed(8));
+    // const bitcoinValue = userDatas?.accountBalance / exchangeRate;
+    // const bitcoinValue2 = userDatas?.totalProfit / exchangeRate;
+    // const bitcoinValue3 = userDatas?.bonus / exchangeRate;
+    // const bitcoinValue4 = userDatas?.ref / exchangeRate;
+    // const bitcoinValue5 = userDatas?.totalDeposit / exchangeRate;
+    // const bitcoinValue6 = userDatas?.totalWithdrawal / exchangeRate;
+    // const bitcoinValue7 = userDatas?.totalInvestment / exchangeRate;
+    // const roundedNumber = parseFloat(bitcoinValue.toFixed(8));
+    // const roundedNumber2 = parseFloat(bitcoinValue2.toFixed(8));
+    // const roundedNumber3 = parseFloat(bitcoinValue3.toFixed(8));
+    // const roundedNumber4 = parseFloat(bitcoinValue4.toFixed(8));
+    // const roundedNumber5 = parseFloat(bitcoinValue5.toFixed(8));
+    // const roundedNumber6 = parseFloat(bitcoinValue6.toFixed(8));
+    // const roundedNumber7 = parseFloat(bitcoinValue7.toFixed(8));
 
     return (
         <div className="w-full h-max px-48 phone:px-6 py-10 phone:py-6 flex flex-col gap-8 ">
@@ -127,9 +136,9 @@ const DashboardHome = () => {
                             </p>
                             <p className="w-full flex items-center justify-between text-3xl text-white">
                                 { loading ? <ClipLoader color='white' /> :  `$${userDatas?.accountBalance}`}
-                                <span className="text-[#1ee0ac] text-sm">
+                                {/* <span className="text-[#1ee0ac] text-sm">
                                { roundedNumber}
-                                </span>
+                                </span> */}
                             </p>
                         </div>
                     </div>
@@ -143,9 +152,9 @@ const DashboardHome = () => {
                             </p>
                             <p className="w-full flex items-center justify-between text-3xl text-white">
                                 { loading ? <ClipLoader color='white' /> :  `$${userDatas?.totalInvestment}`}
-                                <span className="text-[#1ee0ac] text-sm">
+                                {/* <span className="text-[#1ee0ac] text-sm">
                                     {roundedNumber7}
-                                </span>
+                                </span> */}
                             </p>
                         </div>
                     </div>
@@ -159,9 +168,9 @@ const DashboardHome = () => {
                             </p>
                             <p className="w-full flex items-center justify-between text-3xl text-white">
                                 { loading ? <ClipLoader color='white' /> :  `$${userDatas?.totalProfit}`}
-                                <span className="text-[#1ee0ac] text-sm">
+                                {/* <span className="text-[#1ee0ac] text-sm">
                                     {roundedNumber2}
-                                </span>
+                                </span> */}
                             </p>
                         </div>
                     </div>
