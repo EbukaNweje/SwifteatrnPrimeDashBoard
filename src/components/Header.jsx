@@ -428,13 +428,13 @@ const handleNavToPlan = () => {
                             </div>
                         </div>
                         <div
-                            className={`w-full h-max flex flex-col cursor-pointer gap-2 text-sm text-[#777777] ${
+                              className={`w-full h-max flex flex-col cursor-pointer gap-2 text-sm text-[#777777] ${
                                 dropInvestment
-                                    ? "w-full max-h-[9rem] overflow-hidden transition-max-h duration-700 ease-in-out "
-                                    : "max-h-0 opacity-0 transition-max-h duration-700 pointer-events-none overflow-hidden"
-                            }`}
+                                  ? "max-h-[999px] overflow-hidden transition-all duration-700 ease-in-out"
+                                  : "max-h-0 opacity-0 transition-all duration-700 pointer-events-none overflow-hidden"
+                              }`}
                         >
-                            {/* <NavLink
+                            <NavLink
                                 to={"/dashboard/my-invest"}
                                 className={({isActive}) =>
                                     !isActive
@@ -446,7 +446,7 @@ const handleNavToPlan = () => {
                                     <span className="w-1 h-1 rounded-full bg-[#777777]"></span>
                                     <p className="">Investment</p>
                                 </div>
-                            </NavLink> */}
+                            </NavLink>
                             <NavLink
                                 to={"/dashboard/profit"}
                                 className={({isActive}) =>
