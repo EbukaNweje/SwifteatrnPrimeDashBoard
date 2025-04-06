@@ -13,7 +13,7 @@ const DepositHistory = () => {
 
         const [loading, setLoading] = useState(false);
         const [userDatas, setUserDatas] = useState([]);
-        const [exchangeRate, setExchangeRate] = useState(null);
+        // const [exchangeRate, setExchangeRate] = useState(null);
 
     const handleGetAllDeposits = async () => {
         setLoading(true);
@@ -38,17 +38,17 @@ const DepositHistory = () => {
         }
     }, [id]);
 
-    useEffect(() => {
-        axios
-            .get("https://api.coindesk.com/v1/bpi/currentprice.json")
-            .then((response) => {     
-                const rate = response.data.bpi.USD.rate.replace(",", ""); // assuming USD rate
-                setExchangeRate(parseFloat(rate));
-            })
-            .catch((error) => {
-                console.error("Error fetching exchange rate:", error);
-            });
-    }, []); 
+    // useEffect(() => {
+    //     axios
+    //         .get("https://api.coindesk.com/v1/bpi/currentprice.json")
+    //         .then((response) => {     
+    //             const rate = response.data.bpi.USD.rate.replace(",", ""); // assuming USD rate
+    //             setExchangeRate(parseFloat(rate));
+    //         })
+    //         .catch((error) => {
+    //             console.error("Error fetching exchange rate:", error);
+    //         });
+    // }, []); 
 
     // const bitcoinValue = userDatas?.amount / exchangeRate;
 // const roundedNumber = parseFloat(bitcoinValue.toFixed(8));
@@ -89,9 +89,9 @@ const DepositHistory = () => {
                                     <MdHistory color="#364a63" size={25} />
                                 </div>
                                 <div className="w-max flex flex-col gap-1">
-                                    <p className="text-[#364a63] font-semibold text-sm">
+                                    {/* <p className="text-[#364a63] font-semibold text-sm">
                                         { parseFloat(e?.amount / exchangeRate.toFixed(8))} - {e?.coin}
-                                    </p>
+                                    </p> */}
                                     <p className="text-[#8094ae] text-sm flex gap-2">
                                         Deposit Amount -
                                         <span className="text-[#364a63] font-semibold text-xs">

@@ -253,9 +253,9 @@ useEffect(() => {
                             <p className="w-full h-max flex justify-between">
                                 Total withdrawal<span>${userDatas?.totalWithdrawal}</span>
                             </p>
-                            <p className="w-full h-max flex justify-between">
-                                Trading acoounts Packages <span>${userDatas?.tradingAccounts}</span>
-                            </p>
+                            {/* <p className="w-full h-max flex justify-between">
+                                Trading acoounts Packages <span>{userDatas?.investmentPlan?.leght}</span>
+                            </p> */}
                         </div>
                     </div>
                     <div className="w-full h-max flex">
