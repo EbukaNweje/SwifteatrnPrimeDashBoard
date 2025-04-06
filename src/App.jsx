@@ -54,8 +54,13 @@ const App = () => {
             errorElement: <ErrorPage />,
             element: <DashboardRoute element={<Dashboard />}></DashboardRoute>,
             children: [
-                { path: "", element: <DashboardHome />, },
-                { path: ":userId", element: <DashboardHome />, },
+                {
+                    path: "",
+                    children: [
+                      { path: "", element: <DashboardHome /> },              // when visiting /dashboard
+                      { path: ":userId", element: <DashboardHome /> },       // when visiting /dashboard/123
+                    ]
+                },
                 { path: "deposit", element: <Deposit />, },
                 { path: "deposit-pay",element: <DepositPay />, },
                 { path: "my-plans", element: <MyPlans />,},
