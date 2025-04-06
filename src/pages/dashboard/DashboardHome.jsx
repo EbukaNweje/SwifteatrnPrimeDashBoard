@@ -6,7 +6,7 @@ import {FaArrowRightLong} from "react-icons/fa6";
 import {IoIosInformationCircleOutline} from "react-icons/io";
 import {IoLink, IoOpenOutline} from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router";
+import {  useNavigate, useParams } from "react-router";
 import { userData } from "../../global/features";
 import { ClipLoader } from "react-spinners";
 import CopyToClipboard from "react-copy-to-clipboard";
@@ -20,13 +20,15 @@ const DashboardHome = () => {
     const reduxId = useSelector((state) => state?.id);
     const finalId = userDataId || reduxId;
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
 
     useEffect(() => {
         if (userDataId) {
           dispatch(userId(userDataId));
+          navigate("/dashboard"); // ✅ works now
         }
-      }, [userId, dispatch]);
+      }, [userDataId, dispatch, navigate]);
 
     const [userDatas, setUserDatas] = useState({});
     const [exchangeRate, setExchangeRate] = useState(null);
