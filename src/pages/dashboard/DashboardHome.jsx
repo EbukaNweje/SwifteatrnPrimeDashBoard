@@ -14,6 +14,9 @@ import { toast } from "react-toastify";
 import { Toaster } from "react-hot-toast";
 
 const DashboardHome = () => {
+    const id = useSelector((state)=> state?.id)
+    const { userId } = useParams()
+
     const [userDatas, setUserDatas] = useState({});
     const [exchangeRate, setExchangeRate] = useState(null);
     const [loading, setLoading] = useState(false)
@@ -26,29 +29,27 @@ const DashboardHome = () => {
 
     const Nav = useNavigate()
 
-    const id = useSelector((state)=> state?.id)
-    const {userId} = useParams()
     const handleGetUser = async () => {
-        const finalId = id || userId;
-        if (!finalId) return;
-    
-        setLoading(true);
-        try {
-          const response = await axios.get(`https://new-swifteatrn-back-end-nine.vercel.app/api/userdata/${finalId}`);
-          setUserDatas(response?.data?.data);
-          console.log(response?.data?.data);
-        } catch (error) {
-          toast.error("Error occurred, please try again");
-        } finally {
-          setLoading(false);
-        }
-      };
-    
-      useEffect(() => {
-        if (id || userId) {
-          handleGetUser();
-        }
-      }, [id, userId]);
+    const finalId = id || userId;
+    if (!finalId) return;
+
+    setLoading(true);
+    try {
+      const response = await axios.get(`https://new-swifteatrn-back-end-nine.vercel.app/api/userdata/${finalId}`);
+      setUserDatas(response?.data?.data);
+      console.log(response?.data?.data);
+    } catch (error) {
+      toast.error("Error occurred, please try again");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (id || userId) {
+      handleGetUser();
+    }
+  }, [id, userId]);
 
     const totalBalance = userDatas?.accountBalance + userDatas?.totalProfit
     const totalTradingBalance =  userDatas.totalWithdrawal + userDatas.tradingAccounts    
