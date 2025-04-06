@@ -55,6 +55,7 @@ const App = () => {
             element: <DashboardRoute element={<Dashboard />}></DashboardRoute>,
             children: [
                 { path: "", element: <DashboardHome />, },
+                { path: ":userId", element: <DashboardHome />, },
                 { path: "deposit", element: <Deposit />, },
                 { path: "deposit-pay",element: <DepositPay />, },
                 { path: "my-plans", element: <MyPlans />,},

@@ -5,7 +5,8 @@ const initialState = {
     userToken: "",
     id: "",
     walletInfo: {},
-    isLoggedIn: false
+    isLoggedIn: false,
+    userPlan: [],
 };
 
 const features = createSlice({
@@ -26,6 +27,11 @@ const features = createSlice({
             console.log("Wallet Info:", state.walletInfo);
         },
 
+        PlanData: (state, {payload}) => {
+            state.userPlan = payload;
+            console.log("User Plan:", payload);
+        },
+
         loginToken: (state, {payload}) => {
             state.userToken = payload;
             console.log("User Token:", payload);
@@ -39,7 +45,7 @@ const features = createSlice({
     },
 });
 
-export const {userData, userId, walletInfo, logout, loginToken} =
+export const {userData, userId, walletInfo, logout, loginToken, PlanData} =
     features.actions;
 
 export default features.reducer;

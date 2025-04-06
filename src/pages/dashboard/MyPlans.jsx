@@ -4,16 +4,19 @@ import { FaCheckCircle } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { PlanData } from "../../global/features";
 
 const MyPlans = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const id = useSelector((state) => state?.id); 
     const [plan, setPlan] = useState(null);
     const [loading, setLoading] = useState(false);
     const [userDatas, setUserDatas] = useState([]);
 
     const handleProceed = () => {
-        navigate("/dashboard/deposit");
+        navigate("/dashboard/Investmentpay");
     };
 
     const handleGetAllPlans = async () => {
@@ -37,6 +40,8 @@ const MyPlans = () => {
             handleGetAllPlans();
         }
     }, [id]);
+
+    console.log("this is what i clicked",plan);
 
     return (
         <div className="w-full h-max flex px-48 phone:px-6 phone:gap-2 flex-col gap-6 py-10 items-center text-[#8094ae]">
@@ -106,7 +111,7 @@ const MyPlans = () => {
                                 ) : (
                                     <button
                                         className="w-full py-3 text-xs font-semibold rounded text-[#364a63] bg-[#f5f6fa]"
-                                        onClick={() => setPlan(i)}
+                                        onClick={() => {setPlan(i), dispatch(PlanData(e))}}
                                     >
                                         CHOOSE THIS PLAN
                                     </button>

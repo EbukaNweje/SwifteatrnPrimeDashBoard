@@ -6,7 +6,7 @@ import {FaArrowRightLong} from "react-icons/fa6";
 import {IoIosInformationCircleOutline} from "react-icons/io";
 import {IoLink, IoOpenOutline} from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { userData } from "../../global/features";
 import { ClipLoader } from "react-spinners";
 import CopyToClipboard from "react-copy-to-clipboard";
@@ -27,26 +27,28 @@ const DashboardHome = () => {
     const Nav = useNavigate()
 
     const id = useSelector((state)=> state?.id)
-
+    const {userId} = useParams()
     const handleGetUser = async () => {
-        setLoading(true)
-        await axios.get(`https://new-swifteatrn-back-end-nine.vercel.app/api/userdata/${id}`)
-            .then(response => {
-                setLoading(false)
-                setUserDatas(response?.data?.data);
-                console.log(response?.data?.data);
-            })
-            .catch(error => {
-                setLoading(false)
-                toast.log("error occurred, please try again");
-            });
-    };
-  
-    useEffect(() => {
-        if (id) {
-            handleGetUser();
+        const finalId = id || userId;
+        if (!finalId) return;
+    
+        setLoading(true);
+        try {
+          const response = await axios.get(`https://new-swifteatrn-back-end-nine.vercel.app/api/userdata/${finalId}`);
+          setUserDatas(response?.data?.data);
+          console.log(response?.data?.data);
+        } catch (error) {
+          toast.error("Error occurred, please try again");
+        } finally {
+          setLoading(false);
         }
-    }, [id]);
+      };
+    
+      useEffect(() => {
+        if (id || userId) {
+          handleGetUser();
+        }
+      }, [id, userId]);
 
     const totalBalance = userDatas?.accountBalance + userDatas?.totalProfit
     const totalTradingBalance =  userDatas.totalWithdrawal + userDatas.tradingAccounts    

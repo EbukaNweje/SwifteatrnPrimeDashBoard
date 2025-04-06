@@ -16,12 +16,13 @@ const Investmentpay = () => {
   const [amount, setAmount] = useState(0.0);
   const [exchangeRate, setExchangeRate] = useState(null);
   const [openModal, setOpenModal] = useState(false);
-  const [userPlan, setUserPlan] = useState([]);
-  const [selectedPackage, setSelectedPackage] = useState(null);
+  // const [userPlan, setUserPlan] = useState([]);
+  // const [selectedPackage, setSelectedPackage] = useState(null);
   const [planPrice, setPlanPrice] = useState(0);
   const [laoding, setLoading] = useState(false)
 
   const userId = useSelector((state) => state.id)
+  const selectedPackage = useSelector((state) => state.userPlan)
   console.log(userId)
 
   const User = z.object({
@@ -40,44 +41,44 @@ const Investmentpay = () => {
     resolver: zodResolver(User),
   });
 
-  useEffect(() => {
-    axios
-      .get("https://api.coindesk.com/v1/bpi/currentprice.json")
-      .then((response) => {
-        const rate = response.data.bpi.USD.rate.replace(",", "");
-        setExchangeRate(parseFloat(rate));
-      })
-      .catch((error) => {
-        console.error("Error fetching exchange rate:", error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("https://api.coindesk.com/v1/bpi/currentprice.json")
+  //     .then((response) => {
+  //       const rate = response.data.bpi.USD.rate.replace(",", "");
+  //       setExchangeRate(parseFloat(rate));
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching exchange rate:", error);
+  //     });
+  // }, []);
 
   const bitcoinValue = amount / exchangeRate;
   const roundedNumber = parseFloat(bitcoinValue.toFixed(8));
 
-  const getAllPlan = () => {
-    const url =
-      "https://new-swifteatrn-back-end-nine.vercel.app/api/getallplan";
-    axios
-      .get(url)
-      .then((response) => {
-        setUserPlan(response?.data?.data || []);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  // const getAllPlan = () => {
+  //   const url =
+  //     "https://new-swifteatrn-back-end-nine.vercel.app/api/getallplan";
+  //   axios
+  //     .get(url)
+  //     .then((response) => {
+  //       setUserPlan(response?.data?.data || []);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
-  useEffect(() => {
-    getAllPlan();
-  }, []);
+  // useEffect(() => {
+  //   getAllPlan();
+  // }, []);
 
-  const handlePlanChange = (e) => {
-    const selectedPlan = userPlan.find(
-      (plan) => plan.planName === e.target.value
-    );
-    setSelectedPackage(selectedPlan);
-  };
+  // const handlePlanChange = (e) => {
+  //   const selectedPlan = userPlan.find(
+  //     (plan) => plan.planName === e.target.value
+  //   );
+  //   setSelectedPackage(selectedPlan);
+  // };
 
   const handleAmountChange = (e) => {
     setAmount(e.target.value);
@@ -104,7 +105,8 @@ const Investmentpay = () => {
       .then(res => {
           setLoading(false)
           toast.success(res.data.message)
-          Nav('')
+          setOpenModal(false)
+          Nav(-1)
       }).catch((err)=>{
           setLoading(false)
           toast.error(err.response.data.message)
@@ -127,7 +129,7 @@ const Investmentpay = () => {
           Ready to get started?
         </p>
         <div className="w-full h-max flex flex-col gap-6 mt-4">
-          <div className="w-full h-max flex flex-col gap-2">
+          {/* <div className="w-full h-max flex flex-col gap-2">
             <p className="text-sm">Choose a plan </p>
             <select
               onChange={handlePlanChange}
@@ -140,7 +142,7 @@ const Investmentpay = () => {
                 </option>
               ))}
             </select>
-          </div>
+          </div> */}
           <div className="w-full h-max flex flex-col gap-2">
             <p className="text-sm">Enter your amount</p>
             <div className="w-full h-14 flex items-center border border-gray-300 rounded px-4 py-2 bg-white">
@@ -178,27 +180,39 @@ const Investmentpay = () => {
             </div>
             <div className="w-full h-max flex flex-col justify-between">
               <p className="w-full h-max text-xs gap-1 text-[#8094ae]">
-                Fees
-                <span className="text-[#526484] text-sm">$50</span>
+                Selected Plan
+                <span className="text-[#526484] text-sm"> {selectedPackage?.planName || "None"}</span>
               </p>
             </div>
           </div>
           <div className="w-full h-max flex justify-between p-6 border-b border-b-gray-300">
-            <p className="w-[70%] text-xs text-[#8094ae]">Selected Plan</p>
+            <p className="w-[70%] text-xs text-[#8094ae]">Minimum Deposit</p>
             <p className="w-[30%] text-sm text-[#526484]">
-              {selectedPackage?.planName || "None"}
+              {selectedPackage?.minimumDeposit || "0"}
             </p>
           </div>
           <div className="w-full h-max flex justify-between p-6 border-b border-b-gray-300">
-            <p className="w-[70%] text-xs text-[#8094ae]">Amount</p>
-            <p className="w-[30%] text-sm text-[#526484]">${amount}</p>
+            <p className="w-[70%] text-xs text-[#8094ae]">Maximum Deposit</p>
+            <p className="w-[30%] text-sm text-[#526484]">
+              {selectedPackage?.maximumDeposit || "0"}
+            </p>
+          </div>
+          <div className="w-full h-max flex justify-between p-6 border-b border-b-gray-300">
+            <p className="w-[70%] text-xs text-[#8094ae]">Percentage Interest</p>
+            <p className="w-[30%] text-sm text-[#526484]">
+              {selectedPackage?.percentageInterest || "0"}%
+            </p>
+          </div>
+          <div className="w-full h-max flex justify-between p-6 border-b border-b-gray-300">
+            <p className="w-[70%] text-xs text-[#8094ae]">Durationc Days</p>
+            <p className="w-[30%] text-sm text-[#526484]">{selectedPackage?.durationDays} {selectedPackage?.durationDays > 1 ? "Days" : "Day"}</p>
           </div>
           <div className="w-full h-20 flex items-center justify-center bg-[#f5f6fa]">
             <button
               className="px-5 py-2 rounded text-white font-semibold bg-[#a286f4]"
               onClick={handleOpenModal}
             >
-              Confirm & Withdrawal
+              Confirm & Invest
             </button>
           </div>
         </div>
@@ -212,10 +226,10 @@ const Investmentpay = () => {
         closeIcon={false}
       >
         <div className="flex flex-col items-center gap-4">
-          <p>Confirm Your Payment</p>
+          <p>Confirm Your Investment</p>
           <p className="text-center">
-            This is to confirm your payment of ${amount} ({roundedNumber} BTC)
-             {selectedPackage?.planName || "None"} Payment. Please cancel
+            This is to confirm your investment of ${amount} {" "}
+             {selectedPackage?.planName || "None"}. Please cancel
             if you did not initiate the transaction.
           </p>
           <button
