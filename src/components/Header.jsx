@@ -15,7 +15,7 @@ import Logo from '../assets/logo.png'
 import { ClipLoader } from "react-spinners";
 import { logout } from "../global/features";
 import { toast } from "react-toastify";
-import DownLoadButton from "./DownLoadButton"
+// import DownLoadButton from "./DownLoadButton"
 const Header = () => {
     const [drop1, setDrop1] = useState(false);
     const [drop2, setDrop2] = useState(false);
@@ -88,7 +88,7 @@ const handleNavToPlan = () => {
                                 onClick={() => setOpenSideBar(!openSideBar)}
                             />
                               <img src={Logo} alt="Logo" className="w-40 h-full"/>
-                              <DownLoadButton/>
+                              {/* <DownLoadButton/> */}
                         </div>
                         <div className="w-max h-full flex gap-2 text-white phone:hidden">
                             <NavLink to={"/dashboard"}>

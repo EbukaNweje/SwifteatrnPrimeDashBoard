@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { ClipLoader } from "react-spinners";
 import DownLoadButton from "../../components/DownLoadButton"
+import { FacebookFilled } from "@ant-design/icons";
 
 const Login = () => {
 
@@ -61,13 +62,15 @@ const [loading, setLoading] = useState(false)
   };
   const currentYear = new Date().getFullYear();
 
+//   const handleFacebook = () => {
+//     window.location.href = "https://www.facebook.com/profile.php?id=61574843025485"
+//   }
+
     return (
         <div className="w-full h-screen">
             <div className="w-full h-12 bg-[#f8f8f8] phone:hidden px-48 flex items-center justify-between">
                 <div className="w-max flex items-center gap-4">
-                    <FaTwitter />
-                    <FaTelegram />
-                    <FaInstagram />
+                    <FacebookFilled onClick={"handleFacebook"}/>
                 </div>
                 <div className="w-max flex items-center gap-5 text-sm">
                     <div className="w-max h-max cursor-pointer">Help</div>

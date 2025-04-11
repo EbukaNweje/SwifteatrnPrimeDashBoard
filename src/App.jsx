@@ -28,7 +28,7 @@ import Await from "./pages/auth/Await";
 const App = () => {
     const router = createHashRouter([
         {
-            path: "",
+            path: "/",
             element: <Login />,
         },
         {

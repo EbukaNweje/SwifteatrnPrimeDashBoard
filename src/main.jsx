@@ -8,17 +8,17 @@ import {Provider} from "react-redux";
 import {PersistGate} from "redux-persist/integration/react";
 import {persistStore} from "redux-persist";
 import 'react-toastify/dist/ReactToastify.css';
-import { registerSW } from 'virtual:pwa-register';
+// import { registerSW } from 'virtual:pwa-register';
 
 
 
-const updateSW = registerSW({
-    onNeedRefresh() {
-      if (confirm('New update available! Refresh?')) {
-        updateSW(true);
-      }
-    },
-  });
+// const updateSW = registerSW({
+//     onNeedRefresh() {
+//       if (confirm('New update available! Refresh?')) {
+//         updateSW(true);
+//       }
+//     },
+//   });
 
 const persistor = persistStore(store);
 
