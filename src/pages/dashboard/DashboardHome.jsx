@@ -179,9 +179,7 @@ useEffect(() => {
                             </p>
                             <p className="w-full flex items-center justify-between text-3xl text-white">
                                 { loading ? <ClipLoader color='white' /> :  `$${userDatas?.totalInvestment}`}
-                                {/* <span className="text-[#1ee0ac] text-sm">
-                                    {roundedNumber7}
-                                </span> */}
+                              
                             </p>
                         </div>
                     </div>
