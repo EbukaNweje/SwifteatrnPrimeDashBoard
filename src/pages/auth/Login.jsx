@@ -56,8 +56,8 @@ const [loading, setLoading] = useState(false)
     })
     .catch(error =>{
       setLoading(false)
-      toast.error(error.response.data.message)
-      console.log("error:",error.response.data.message)
+      toast.error(error?.response?.data?.message)
+      console.log("error:",error?.response?.data?.message)
     })
   };
   const currentYear = new Date().getFullYear();

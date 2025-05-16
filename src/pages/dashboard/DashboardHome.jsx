@@ -18,6 +18,8 @@ const DashboardHome = () => {
     // const id = useSelector((state)=> state?.id)
     const { userDataId } = useParams();
     const reduxId = useSelector((state) => state?.id);
+    const id = useSelector((state)=> state.id)
+
     const finalId = userDataId || reduxId;
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -33,6 +35,7 @@ const DashboardHome = () => {
     const [userDatas, setUserDatas] = useState({});
     const [exchangeRate, setExchangeRate] = useState(null);
     const [loading, setLoading] = useState(false)
+    const [myInvestments, setMyInvestments] = useState([])
     // const userName = userDatas?.userName
     // console.log("this is UserName", userName)
     const [state, setState] = useState({
@@ -94,6 +97,28 @@ useEffect(() => {
     // const roundedNumber5 = parseFloat(bitcoinValue5.toFixed(8));
     // const roundedNumber6 = parseFloat(bitcoinValue6.toFixed(8));
     // const roundedNumber7 = parseFloat(bitcoinValue7.toFixed(8));
+
+    const handleGetAllInvestments = async () => {
+        setLoading(true);
+        try {
+            const response = await axios.get(
+                `https://new-swifteatrn-back-end-nine.vercel.app/api/getallinvestmentplan/${reduxId}`
+            );
+            setMyInvestments(response.data.data);
+            console.log(response.data.data);
+            
+        } catch (error) {
+            toast.error("Error fetching plans, please try again");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        if (reduxId) {
+            handleGetAllInvestments();
+        }
+    }, [reduxId]);
 
     return (
         <div className="w-full h-max px-48 phone:px-6 py-10 phone:py-6 flex flex-col gap-8 ">
@@ -246,7 +271,7 @@ useEffect(() => {
                         <div className="w-full h-max flex flex-col gap-2">
                             <p className="text-[#8094ae]">My Investment</p>
                             <p className="w-full flex items-center justify-between text-3xl text-[#526484]">
-                            ${totalTradingBalance} - Total
+                                {myInvestments?.length || 0} - Total
                             </p>
                         </div>
                         <div className="w-full h-max flex flex-col gap-2 border-t-2 border-t-[#a286f4] mt-2 pt-5 text-sm text-[#526484]">
